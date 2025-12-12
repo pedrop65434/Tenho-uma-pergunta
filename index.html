@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Namoro ❤️</title>
+
+    <style>
+        body {
+            background: #ffdde1;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Centraliza na tela toda */
+            margin: 0;
+            overflow: hidden; /* Evita barras de rolagem quando o botão foge */
+        }
+
+        #container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(255, 79, 112, 0.3);
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #d81b60;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px; /* Espaço entre botões */
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-weight: bold;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        #yes {
+            background: #ff4f70;
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 79, 112, 0.4);
+        }
+
+        #no {
+            background: #e0e0e0;
+            color: #555;
+        }
+
+        /* Mensagem final escondida */
+        #final-msg {
+            display: none;
+        }
+        
+        #final-msg h1 {
+            font-size: 30px;
+            color: #ff4f70;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="musica" src="musica.mp3" loop></audio>
+
+    <div id="container">
+        <div id="screen-question">
+            <h1 id="pergunta-texto">Você aceita namorar comigo? ❤️</h1>
+            
+            <img src="foto.jpg" alt="Nossa foto">
+
+            <div class="btn-container">
+                <button id="yes">SIM 😍</button>
+                <button id="no">NÃO 😢</button>
+            </div>
+        </div>
+
+        <div id="final-msg">
+            <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Beijo">
+            <h1>EU SABIA QUE VOCÊ IA ACEITAR! 😍❤️</h1>
+            <p>Te amo muito!</p>
+        </div>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById("yes");
+        const noBtn = document.getElementById("no");
+        const questionScreen = document.getElementById("screen-question");
+        const finalMsg = document.getElementById("final-msg");
+        const musica = document.getElementById("musica");
+        const textoPergunta = document.getElementById("pergunta-texto");
+
+        // Frases para quando tentar clicar em NÃO
+        const frases = [
+            "Tem certeza? 🥺",
+            "Pensa com carinho... ❤️",
+            "Eu faço massagem! 💆‍♂️",
+            "Vou contar pra sua mãe! 😠",
+            "Não aceito um não! 😤",
+            "Clica no SIM logo! 😍"
+        ];
+        let indiceFrase = 0;
+
+        // Lógica do botão NÃO (Fugir e mudar texto)
+        noBtn.addEventListener("click", fugir);
+        noBtn.addEventListener("mouseover", fugir); // Para PC (foge quando passa o mouse)
+
+        function fugir() {
+            // Define posição absoluta para poder mover livremente na tela
+            noBtn.style.position = "fixed"; 
+            
+            // Gera posições aleatórias na tela (respeitando as bordas)
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
+            
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+
+            // Muda o texto da pergunta
+            if (indiceFrase < frases.length) {
+                textoPergunta.innerText = frases[indiceFrase];
+                indiceFrase++;
+            }
+        }
+
+        // Lógica do botão SIM (Tocar música e mostrar final)
+        yesBtn.addEventListener("click", () => {
+            // 1. Tocar a música (Garantido pelo clique)
+            musica.play().then(() => {
+                console.log("Música tocando!");
+            }).catch(e => console.log("Erro no play:", e));
+
+            // 2. Esconder a pergunta e mostrar a resposta
+            questionScreen.style.display = "none";
+            finalMsg.style.display = "block";
+        });
+    </script>
+
+</body>
+</html>
