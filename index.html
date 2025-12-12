@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenho uma pergunta...</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe4ec;
+            padding: 40px;
+        }
+        #container {
+            max-width: 450px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        #sim {
+            background-color: #ff4d79;
+            color: white;
+        }
+        #nao {
+            background-color: #999;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <img src="foto.jpg" alt="Foto fofinha">
+
+        <h2>Quer namorar comigo?...</h2>
+
+        <button id="sim">Sim</button>
+        <button id="nao">Não</button>
+
+        <!-- PLAYER DA MÚSICA -->
+        <audio id="musica" src="musica.mp3"></audio>
+    </div>
+
+    <script>
+        const sim = document.getElementById("sim");
+        const nao = document.getElementById("nao");
+        const musica = document.getElementById("musica");
+
+        sim.onclick = () => {
+            musica.play();
+            alert("Awnnn eu sabia ❤️🥺");
+        };
+
+        nao.onclick = () => {
+            alert("Resposta errada 😠 tente novamente!");
+        };
+    </script>
+
+</body>
+</html>
